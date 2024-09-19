@@ -38,4 +38,13 @@ if not os.path.exists(persistent_dir):
     )
     print("\n--- Finished creating embeddings for the documents ---")
     
+    # Create the vector store and persist it automatically
+    print("\n--- Creating the Chroma vector store ---")
+    db = Chroma.from_documents(
+        docs, embeddings, persist_directory=persistent_dir
+    )
     
+    print("\n--- Finished creating the Chroma vector store ---")
+
+else:
+    print("Persitent directory exists. Loading Chroma vector store.")    
