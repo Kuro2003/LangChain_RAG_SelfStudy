@@ -20,8 +20,8 @@ prompt_template = ChatPromptTemplate.from_messages(
 
 # Create individual runnables
 format_prompt = RunnableLambda(lambda x: prompt_template.format_prompt(**x))
-invoke_model = RunnableLambda(lambda x: model.invoke(x.to_messages()))
-parse_output = RunnableLambda(lambda x: x.content)
+invoke_model = RunnableLambda(lambda x: model.invoke(x.to_messages()))  # type: ignore
+parse_output = RunnableLambda(lambda x: x.content) # type: ignore
 
 # Create a sequence of runnables
 chain = RunnableSequence(first=format_prompt, middle=[invoke_model], last=parse_output)
